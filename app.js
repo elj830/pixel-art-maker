@@ -52,10 +52,35 @@ function getRandomColor() {
 let storedColor;
 
 document.addEventListener('click', (event) => {
+
+    if(event.target.className === 'clear'){
+        console.log('test')
+        let pixels = document.getElementsByClassName('pixel')
+        for (let i = 0; i < pixels.length; i++){
+            pixels[i].style.backgroundColor = 'white'
+            pixels[i].style.border = '1px solid black'
+        }
+        
+    }
     
     if(event.target.className === 'palette-pixel'){
         storedColor = event.target.style.backgroundColor
     }
+
+    if(event.target.className === 'pixel'&& storedColor === 'white'){
+        event.target.style.border = '1px solid black'
+        event.target.style.backgroundColor = 'white'
+    }
+
+    else if(event.target.className === 'pixel'){
+        event.target.style.backgroundColor = storedColor
+        event.target.style.border = `1px solid ${storedColor}`
+        }
+
+})
+
+document.addEventListener('dragover', (event) => {
+    
     if(event.target.className === 'pixel'&& storedColor === 'white'){
         event.target.style.border = '1px solid black'
         event.target.style.backgroundColor = 'white'
