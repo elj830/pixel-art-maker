@@ -1,17 +1,11 @@
+
+
+
+//DRAWING CONTENTS ON LOAD
 document.addEventListener('DOMContentLoaded', () => {
 let table = document.getElementsByClassName('grid')
 
-// for (let i = 0; i < 30; i++){
-//     let newRow = document.createElement('tr')
-//     newRow.className = 'row' 
-//     document.body.append(newRow)
-//     for (let j = 0; j < 30; j++){
-//         let insertRow = document.getElementsByClassName('row')[i]
-//         let newNode = document.createElement('td')
-//         newNode.className = 'pixel'
-//         insertRow.append(newNode)
-//     }   
-// }
+//DRAWS A 30 X 30 CANVAS
 let container = document.getElementById('container')
 for (let i =0; i < 900; i++){
     let newNode = document.createElement('div')
@@ -19,6 +13,7 @@ for (let i =0; i < 900; i++){
     container.append(newNode)
 }
 
+//GENERATES RANDOM COLOR FOR PALETTE
 let color;
 function getRandomColor() {
     var letters = '0123456789ABCDEF';
@@ -29,6 +24,7 @@ function getRandomColor() {
     return color;
   }
   
+  //DRAWS THE PALETTE WITH RANDOM COLORS
   let palette = document.getElementById('palette')
   for (let i =0; i < 30; i++){
       let newNode = document.createElement('div')
@@ -49,10 +45,13 @@ function getRandomColor() {
 }
 )
 
+//GLOBAL STORED COLOR FOR DRAWING
 let storedColor;
 
+//CLICK FUNCTIONALITY
 document.addEventListener('click', (event) => {
 
+    //IF TARGET IS CLEAR BUTTON, RESETS THE WHOLE GRID TO WHITE
     if(event.target.className === 'clear'){
         console.log('test')
         let pixels = document.getElementsByClassName('pixel')
@@ -63,15 +62,18 @@ document.addEventListener('click', (event) => {
         
     }
     
+    //IF TARGET IS A COLOR CHOICE IN THE PALETTE, STORES COLOR TO PAINT WITH
     if(event.target.className === 'palette-pixel'){
         storedColor = event.target.style.backgroundColor
     }
 
+    //IF THE TARGET IS A PIXEL AND COLOR IS WHITE, ADDS BLACK BORDER BACK
     if(event.target.className === 'pixel'&& storedColor === 'white'){
         event.target.style.border = '1px solid black'
         event.target.style.backgroundColor = 'white'
     }
 
+    //DRAWS THE COLOR AND CHANGES BORDER TO MATCH
     else if(event.target.className === 'pixel'){
         event.target.style.backgroundColor = storedColor
         event.target.style.border = `1px solid ${storedColor}`
@@ -79,16 +81,33 @@ document.addEventListener('click', (event) => {
 
 })
 
-document.addEventListener('dragover', (event) => {
-    
-    if(event.target.className === 'pixel'&& storedColor === 'white'){
-        event.target.style.border = '1px solid black'
-        event.target.style.backgroundColor = 'white'
-    }
 
-    else if(event.target.className === 'pixel'){
-        event.target.style.backgroundColor = storedColor
-        event.target.style.border = `1px solid ${storedColor}`
+//DRAG TO PAINT CODE
+let painting = false;
+
+//ON MOUSE BEING HELD DOWN, ALLOWS YOU TO PAINT
+document.addEventListener('mousedown', (event) => {
+    painting = true
+
+})
+
+//ON MOUSE BEING RELEASED, STOPS PAINTING IN PIXELS
+document.addEventListener('mouseup', (event) => {
+    painting = false
+})
+
+//PAINTS ON MOUSE MOVE IF PAINTING IS TRUE
+document.addEventListener('mousemove', (event) => {
+    
+    if (painting === true){
+        if(event.target.className === 'pixel'&& storedColor === 'white'){
+            event.target.style.border = '1px solid black'
+            event.target.style.backgroundColor = 'white'
         }
 
+        else if(event.target.className === 'pixel'){
+            event.target.style.backgroundColor = storedColor
+            event.target.style.border = `1px solid ${storedColor}`
+            }
+    }
 })
