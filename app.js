@@ -65,6 +65,7 @@ document.addEventListener('click', (event) => {
     //IF TARGET IS A COLOR CHOICE IN THE PALETTE, STORES COLOR TO PAINT WITH
     if(event.target.className === 'palette-pixel'){
         storedColor = event.target.style.backgroundColor
+        document.getElementById('currentColor').style.backgroundColor = storedColor
     }
 
     //IF THE TARGET IS A PIXEL AND COLOR IS WHITE, ADDS BLACK BORDER BACK
