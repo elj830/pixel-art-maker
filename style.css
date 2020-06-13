@@ -9,6 +9,11 @@ body{
     margin-right: auto;
     width: 660px;
     height: 600px;
+    background-color: rgb(172, 172, 172);
+    border: 20px;
+    padding: 20px;
+    border-radius: 25px;
+    box-shadow: 10px 10px 75px black;
 }
 
 .pixel{
@@ -29,6 +34,7 @@ body{
     border-radius: 25px;
     width: 660px;
     height: 90px;
+    box-shadow: 10px 10px 75px black;
 }
 
 .palette-pixel{
@@ -49,6 +55,8 @@ button{
     height: 45px;
     width: 90px;
     text-align: center;
+    box-shadow: 10px 10px 75px black;
+    
 
 }
 
